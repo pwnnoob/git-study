@@ -18,7 +18,39 @@ jobs:
         with:
           name: python3.8
           path: python3.8.txt
+          
+  python2:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9"]
 
+    steps:
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)" > python3.9.txt
+        
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v1
+        with:
+          name: python3.9
+          path: python3.9.txt
+
+      
+  python3:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)" > python3.10.txt
+        
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v1
+        with:
+          name: python3.10
+          path: python3.10.txt
     
 
 
