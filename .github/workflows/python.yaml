@@ -3,7 +3,7 @@ name: Python
 on: workflow_dispatch
 
 jobs:
-  build:
+  python1:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -16,4 +16,54 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Display Python version
-        run: python -c "import sys; print(sys.version)"
+        run: python -c "import sys; print(sys.version)" > test/python3.8.txt
+        
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v1
+        with:
+          name: python3.8
+          path: test/python3.8.txt
+
+    
+  python2:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)" > test/python3.9.tx
+        
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v1
+        with:
+          name: python3.9
+          path: test/python3.9.txt
+
+      
+  python3:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)" > test/python3.10.txt            
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v1
+        with:
+          name: python3.10
+          path: test/python3.10.txt
+
